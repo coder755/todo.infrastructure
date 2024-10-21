@@ -85,6 +85,6 @@
   "ssm:account=442042533215:parameterName=todo.storageService.fargate.sg:region=us-east-1": "sg-068c6bc82306eb7a1",
   "ssm:account=442042533215:parameterName=todo.pubsub.queue.url:region=us-east-1": "https://sqs.us-east-1.amazonaws.com/442042533215/todo-pubsub-queue",
   "ssm:account=442042533215:parameterName=todo.pubsub.toprocess.queue.url:region=us-east-1": "https://sqs.us-east-1.amazonaws.com/442042533215/todo-pubsub-toprocess-queue",
-  "ssm:account=442042533215:parameterName=todo.pubsub.sns.topic.arn:region=us-east-1": "arn:aws:sns:us-east-1:442042533215:TodoPubSubStack-todopubsubsnstopicB2200FD4-40dFIEbzf8ek",
+  "ssm:account=442042533215:parameterName=todo.pubsub.sns.topic.arn:region=us-east-1": "arn:aws:sns:us-east-1:442042533215:TodoPubSubStack-todopubsubsnstopicB2200FD4-tdtHM5OZlqfH",
   "ssm:account=442042533215:parameterName=todo.vpc.endpoint.sns.id:region=us-east-1": "vpce-0a40b45f439c411a4"
 }

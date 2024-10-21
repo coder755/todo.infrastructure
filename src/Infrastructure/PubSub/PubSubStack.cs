@@ -42,7 +42,7 @@ public class PubSubStack : Stack
                 
         var topic = new Topic(this, serviceNamespace + ".sns.topic", new TopicProps
         {
-            DisplayName = "Fargate Subscription Topic"
+            DisplayName = "CompletedStorageTasks",
         });
         
         var unused1 = new StringParameter(this, serviceNamespace + ".stringParameter.sns.topic.arn", new StringParameterProps

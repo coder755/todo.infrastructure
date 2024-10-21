@@ -31,14 +31,6 @@ public class UserServiceStack : Stack
         const string dashedServiceNamespace = BaseNamespace + "-" + ServiceName;
 
         var cloudFrontPrefixList = Peer.PrefixList(CloudFrontPrefixListId);
-        var snsVpcEndpointId = StringParameter.ValueFromLookup(this, "todo.vpc.endpoint.sns.id");
-        var snsInterfaceEndpoint = InterfaceVpcEndpoint.FromInterfaceVpcEndpointAttributes(this,
-            serviceNamespace + ".vpc.endpoint.sns", new InterfaceVpcEndpointAttributes
-            {
-                VpcEndpointId = snsVpcEndpointId,
-                Port = 443
-            });
-        
         var httpSecurityGroup = new SecurityGroup(this, serviceNamespace + ".alb.sg.http", new SecurityGroupProps
         {
             AllowAllOutbound = true,
@@ -59,7 +51,6 @@ public class UserServiceStack : Stack
         {
             FromPort = 443, ToPort = 443, Protocol = Protocol.TCP, StringRepresentation = "443:443:TCP"
         }));
-        httpsSecurityGroup.Connections.AllowFrom(snsInterfaceEndpoint, Port.Tcp(443));
         
         LoadBalancer = new ApplicationLoadBalancer(this, serviceNamespace + ".alb", new ApplicationLoadBalancerProps
         {
@@ -152,7 +143,8 @@ public class UserServiceStack : Stack
                 "secretsmanager:DescribeSecret",
                 "secretsmanager:ListSecretVersionIds",
                 "secretsmanager:ListSecrets",
-                "sns:Publish"
+                "sns:Publish",
+                "sns:ConfirmSubscription",
             },
             Resources = new[] { "*" }
         }));
@@ -233,15 +225,19 @@ public class UserServiceStack : Stack
             DesiredCount = 1,
         });
         fargateService.AttachToApplicationTargetGroup(targetGroup);
-        
-        Console.Write($"topic arn: {snsTopicArn}");
-        
+    }
+
+    /**
+    * Do this part manually in the console. The delivery policy must be of type 'application/json'
+    */
+    private void SetUpSnsListener(string serviceNamespace, string snsTopicArn)
+    {
         var snsTopic = Topic.FromTopicArn(this, serviceNamespace + ".sns.topic", snsTopicArn);
-        var snsNotificationUrl = $"https://{LoadBalancer.LoadBalancerDnsName}/{SnsListenerApi}";
-        // snsTopic.AddSubscription(new UrlSubscription(snsNotificationUrl, new UrlSubscriptionProps
-        // {
-        //     Protocol = SubscriptionProtocol.HTTPS,
-        // }));
+        var snsNotificationUrl = $"https://huckandrose.com/{SnsListenerApi}";
+        snsTopic.AddSubscription(new UrlSubscription(snsNotificationUrl, new UrlSubscriptionProps
+        {
+            Protocol = SubscriptionProtocol.HTTPS,
+        }));
     }
 }
 
