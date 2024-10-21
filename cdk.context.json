@@ -1,0 +1,90 @@
+{
+  "availability-zones:account=442042533215:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "ssm:account=442042533215:parameterName=albArn:region=us-east-1": "arn:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc/27159f5535e11f97",
+  "load-balancer:account=442042533215:loadBalancerArn=arn$:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc/27159f5535e11f97:loadBalancerType=application:region=us-east-1": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc/27159f5535e11f97",
+    "loadBalancerCanonicalHostedZoneId": "Z35SXDOTRQ7X7K",
+    "loadBalancerDnsName": "internal-todo-vpc-533289219.us-east-1.elb.amazonaws.com",
+    "vpcId": "vpc-0c0ee5f202e924d5c",
+    "securityGroupIds": [
+      "sg-0b54f195fbdc6880b"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "vpc-provider:account=442042533215:filter.vpc-id=vpc-0c0ee5f202e924d5c:region=us-east-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0c0ee5f202e924d5c",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "442042533215",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "todo-vpc-db-subnet-private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0cbab9a4161522ba0",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-016419c06abefaae6"
+          },
+          {
+            "subnetId": "subnet-0b76051297475b24b",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-0856d59a74069b56c"
+          }
+        ]
+      },
+      {
+        "name": "todo-vpc-db-subnet-public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0d29e7e931d49718c",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-0b7de722222aed352"
+          },
+          {
+            "subnetId": "subnet-00f8d47ebc956308f",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-067fd1acdfc651285"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=442042533215:region=us-east-1:securityGroupId=sg-0b54f195fbdc6880b": {
+    "securityGroupId": "sg-0b54f195fbdc6880b",
+    "allowAllOutbound": false
+  },
+  "ssm:account=442042533215:parameterName=todo.frontEnd.bucket.oai.id:region=us-east-1": "E3QWA8W1JDPQ2A",
+  "ssm:account=442042533215:parameterName=todo.vpc.alb.arn:region=us-east-1": "arn:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc-alb/4159b12b9c927a06",
+  "load-balancer:account=442042533215:loadBalancerArn=arn$:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc-alb/4159b12b9c927a06:loadBalancerType=application:region=us-east-1": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:442042533215:loadbalancer/app/todo-vpc-alb/4159b12b9c927a06",
+    "loadBalancerCanonicalHostedZoneId": "Z35SXDOTRQ7X7K",
+    "loadBalancerDnsName": "internal-todo-vpc-alb-1120436721.us-east-1.elb.amazonaws.com",
+    "vpcId": "vpc-0c0ee5f202e924d5c",
+    "securityGroupIds": [
+      "sg-0b54f195fbdc6880b"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "ssm:account=442042533215:parameterName=todo.vpc.alb.sg:region=us-east-1": "sg-0b54f195fbdc6880b",
+  "ssm:account=442042533215:parameterName=todo.routing.stringParameter.certificate.arn:region=us-east-1": "arn:aws:acm:us-east-1:442042533215:certificate/f190d9dc-23e4-43c8-8f1c-a49146895c30",
+  "ssm:account=442042533215:parameterName=todo.vpc.alb.https.sg:region=us-east-1": "sg-0e81d33f776825d79",
+  "ssm:account=442042533215:parameterName=todo.us.fargate.sg:region=us-east-1": "sg-0bee32ed4f23f8e8a",
+  "ssm:account=442042533215:parameterName=todo.storageService.fargate.sg:region=us-east-1": "sg-068c6bc82306eb7a1",
+  "ssm:account=442042533215:parameterName=todo.pubsub.queue.url:region=us-east-1": "https://sqs.us-east-1.amazonaws.com/442042533215/todo-pubsub-queue",
+  "ssm:account=442042533215:parameterName=todo.pubsub.toprocess.queue.url:region=us-east-1": "https://sqs.us-east-1.amazonaws.com/442042533215/todo-pubsub-toprocess-queue",
+  "ssm:account=442042533215:parameterName=todo.pubsub.sns.topic.arn:region=us-east-1": "arn:aws:sns:us-east-1:442042533215:TodoPubSubStack-todopubsubsnstopicB2200FD4-40dFIEbzf8ek",
+  "ssm:account=442042533215:parameterName=todo.vpc.endpoint.sns.id:region=us-east-1": "vpce-0a40b45f439c411a4"
+}

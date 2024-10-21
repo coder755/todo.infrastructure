@@ -1,0 +1,34 @@
+```mermaid
+
+architecture-beta
+    service internet(internet)[Internet]
+    group awsCloud(cloud)[AWS Cloud]
+    service cf(internet)[CloudFront] in awsCloud
+    service s3(database)[S3 Bucket] in awsCloud
+    service cjpc(internet)[CJ IP] in awsCloud
+    service queue(server)[Queue] in awsCloud
+
+    group vpc(cloud)[VPC] in awsCloud
+
+    group public(cloud)[Public Subnet] in vpc
+    service userLb(server)[User LoadBalancer] in public
+    service bastion(server)[CJ Bastion] in public
+
+    group private(cloud)[Private Subnet] in vpc
+    service userIn(disk)[User Instance] in private
+    service storageLb(server)[Storage LoadBalancer] in private
+    service storageIn(disk)[Storage Instance] in private
+    service db(database)[Database] in private
+
+    internet:B --> T:cf
+    cf:B --> L:userLb
+    cf:R --> L:s3
+    userLb:R --> L:userIn
+    userIn:R --> L:storageLb
+    storageLb:B --> T:storageIn
+    queue:T <-- B:storageIn
+    storageIn:L --> R:db
+    cjpc:R --> L:bastion
+    bastion:R --> L:db
+
+```
